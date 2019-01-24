@@ -4,8 +4,8 @@ import CounterList from './counter-list/counter-list.component';
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
+    return ( 
+        <div className="App">
         <header className="App-header"> 
         <h1>Counter App</h1>
         </header>
@@ -14,7 +14,7 @@ class App extends Component {
             <CounterList/>
           </div>  
         </div>
-      </div>
+      </div> 
     );
   }
 }

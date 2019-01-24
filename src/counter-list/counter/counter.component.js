@@ -47,7 +47,7 @@ class Counter extends Component {
         <p>{this.state.clicks}</p>
         <button onClick={() => this.clickCounter()}>Add</button>
         <button onClick={() => this.resetCounter()}>Reset</button>
-        <BlockButton onClick={this.blockCounter} blocked={this.state.clicked} />
+        <BlockButton onClick={this.blockCounter} blocked={this.state.blocked} />
       </div>
     )
   }
