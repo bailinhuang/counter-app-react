@@ -1,0 +1,7 @@
+.container-counter{
+  display: flex;
+  flex-direction: column;
+  max-width: 18rem;
+  border: 2px solid black;
+}
+
