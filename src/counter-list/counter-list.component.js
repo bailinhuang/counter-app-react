@@ -14,9 +14,9 @@ class CounterList extends Component {
       this.props.addCounter(name)
     }
 
-
     return (
       <div>
+        <h1>Welcome {this.props.username}</h1>
         <div className="counter-form-container">
           <div>
             <label>Name</label>
@@ -26,15 +26,15 @@ class CounterList extends Component {
         </div>
         <div className="counter-list-container">
           {counters}
-        </div>
-
+        </div> 
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  counterList: state.counterList
+  counterList: state.counterList,
+  username: state.username
 });
 
 const mapDispatchToProps = (dispatch, props) => {

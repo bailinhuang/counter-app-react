@@ -1,10 +1,7 @@
-
-
 import uuid from 'uuid'
-const initialState = {
-  clicks: 0,
+const initialState = { 
   blocked: false,
-  counterList: [{ key: uuid(), name: 'bailin' }]
+  counterList: [{key: uuid(), name: 'bailin'}]
 }
 
 const ADD_COUNTER = "ADD_COUNTER"

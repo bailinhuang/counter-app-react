@@ -44,6 +44,9 @@ class Counter extends Component {
   }
 
   render() {
+    if(this.props.reset){
+      this.resetCounter()
+    } 
     return (
       <div className="container-counter">
         <h3>{this.props.name} {this.props.id}</h3>
