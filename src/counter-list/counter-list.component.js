@@ -6,7 +6,11 @@ import './counter-list.component.css'
 class CounterList extends Component {
 
   render() {
-    const counters = this.props.counterList.map(counter => <Counter name={counter.name} id={counter.key} deleteCounter={this.props.deleteCounter} />)
+    const counters = this.props.counterList.map(counter => <Counter 
+      name={counter.name} 
+      id={counter.key} 
+      clicks={counter.clicks}
+      deleteCounter={this.props.deleteCounter} />)
     
     const addCounterToList = () => {
       let name = document.getElementById('counter-name').value

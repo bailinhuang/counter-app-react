@@ -5,11 +5,8 @@ import './counter.component.css'
 class Counter extends Component {
 
   constructor(props) {
-    super(props)
-    this.name = this.props.name
-    this.id = this.props.id
-    this.state = {
-      clicks: 0,
+    super(props) 
+    this.state = { 
       blocked: false
     }
   }
@@ -49,7 +46,7 @@ class Counter extends Component {
     } 
     return (
       <div className="container-counter">
-        <h3>{this.props.name} {this.props.id}</h3>
+        <h3>{this.props.name}</h3>
         <p>{this.state.clicks}</p>
         <button onClick={() => this.clickCounter()}>Add</button>
         <button onClick={() => this.resetCounter()}>Reset</button>

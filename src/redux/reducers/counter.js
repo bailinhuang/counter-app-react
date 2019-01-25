@@ -1,7 +1,7 @@
 import uuid from 'uuid'
 const initialState = { 
   blocked: false,
-  counterList: [{key: uuid(), name: 'bailin'}]
+  counterList: [{key: uuid(), name: 'bailin', clicks: 0}]
 }
 
 const ADD_COUNTER = "ADD_COUNTER"
@@ -9,16 +9,20 @@ const DELETE_COUNTER = "DELETE_COUNTER"
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case ADD_COUNTER:
-      console.log("action add counter")
-      let counter = [{ key: uuid(), name: action.name }]
+    case ADD_COUNTER: 
+      let newName
+      if(action.name === ""){
+        newName = "Counter"
+      } else{
+        newName = action.name
+      }
+      let counter = [{ key: uuid(), name: newName, clicks: 0}]
       return Object.assign(
         {},
         state, {
           counterList: state.counterList.concat(counter)
         });
-    case DELETE_COUNTER:
-      console.log("action delete counter")
+    case DELETE_COUNTER: 
       let newCounterList = [...state.counterList]
       let index = newCounterList.findIndex(x => x.key === action.id); 
       newCounterList.splice(index, 1) 
