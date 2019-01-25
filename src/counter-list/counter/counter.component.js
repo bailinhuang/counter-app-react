@@ -6,7 +6,8 @@ class Counter extends Component {
 
   constructor(props) {
     super(props)
-    this.name = props.name
+    this.name = this.props.name
+    this.id = this.props.id
     this.state = {
       clicks: 0,
       blocked: false
@@ -22,9 +23,11 @@ class Counter extends Component {
   }
 
   resetCounter() {
-    this.setState({
-      clicks: 0
-    })
+    if (!this.state.blocked) {
+      this.setState({
+        clicks: 0
+      })
+    }
   }
 
   blockCounter = () => {
@@ -43,11 +46,12 @@ class Counter extends Component {
   render() {
     return (
       <div className="container-counter">
-        <h3>{this.name}</h3>
+        <h3>{this.props.name} {this.props.id}</h3>
         <p>{this.state.clicks}</p>
         <button onClick={() => this.clickCounter()}>Add</button>
         <button onClick={() => this.resetCounter()}>Reset</button>
         <BlockButton onClick={this.blockCounter} blocked={this.state.blocked} />
+        <button onClick={() => this.props.deleteCounter(this.id)}>Delete</button>
       </div>
     )
   }
