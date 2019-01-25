@@ -33,7 +33,7 @@ class CounterList extends Component {
 }
 
 const mapStateToProps = state => ({
-  counterList: state.counterList,
+  counterList: state.counter.counterList,
   username: state.username
 });
 
