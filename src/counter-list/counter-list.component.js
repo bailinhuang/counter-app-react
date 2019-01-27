@@ -6,16 +6,27 @@ import './counter-list.component.css'
 class CounterList extends Component {
 
   render() {
-    const counters = this.props.counterList.map(counter => <Counter 
-      name={counter.name} 
-      id={counter.key} 
+    const counters = this.props.counterList.map(counter => <Counter
+      name={counter.name}
+      id={counter.key}
       clicks={counter.clicks}
-      deleteCounter={this.props.deleteCounter} />)
-    
+      deleteCounter={this.props.deleteCounter} 
+      viewDetails={viewDetails}/>)
+
     const addCounterToList = () => {
       let name = document.getElementById('counter-name').value
-      console.log(name) 
+      console.log(name)
       this.props.addCounter(name)
+    }
+
+    const resetAllCounters = () => {
+      let name = document.getElementById('counter-name').value
+      console.log(name)
+      this.props.addCounter(name)
+    }
+
+    const viewDetails = (id) => {
+      this.props.viewDetails(id)
     }
 
     return (
@@ -27,10 +38,14 @@ class CounterList extends Component {
             <input id="counter-name"></input>
             <button onClick={addCounterToList}>Add Counter</button>
           </div>
+          <div>
+            <button onClick={resetAllCounters}>Reset all counters</button>
+          </div>
+
         </div>
         <div className="counter-list-container">
           {counters}
-        </div> 
+        </div>
       </div>
     )
   }
@@ -38,7 +53,7 @@ class CounterList extends Component {
 
 const mapStateToProps = state => ({
   counterList: state.counter.counterList,
-  username: state.username
+  username: state.login.username
 });
 
 const mapDispatchToProps = (dispatch, props) => {
@@ -49,6 +64,10 @@ const mapDispatchToProps = (dispatch, props) => {
 
     deleteCounter: (id) => {
       dispatch({ type: 'DELETE_COUNTER', id });
+    },
+
+    viewDetails: (id) => {
+      dispatch({ type: 'VIEW_DETAILS', id });
     }
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import './counter.component.css'
+import { withRouter } from "react-router-dom"
 
 class Counter extends Component {
 
@@ -27,6 +28,11 @@ class Counter extends Component {
     }
   }
 
+  redirectDetails = () => {
+    let url = '/counter-details/' + this.props.id
+    this.props.history.push(url)
+  }
+
   blockCounter = () => {
     if (this.state.blocked) {
       this.setState({
@@ -47,11 +53,12 @@ class Counter extends Component {
     return (
       <div className="container-counter">
         <h3>{this.props.name}</h3>
-        <p>{this.state.clicks}</p>
+        <p>{this.props.clicks}</p>
         <button onClick={() => this.clickCounter()}>Add</button>
         <button onClick={() => this.resetCounter()}>Reset</button>
         <BlockButton onClick={this.blockCounter} blocked={this.state.blocked} />
-        <button onClick={() => this.props.deleteCounter(this.id)}>Delete</button>
+        <button onClick={() => this.redirectDetails()}>Details</button>
+        <button onClick={() => this.props.deleteCounter(this.props.id)}>Delete</button>
       </div>
     )
   }
@@ -77,4 +84,4 @@ Counter.defaultProps = {
   name: 'Counter'
 }
 
-export default Counter
+export default withRouter(Counter) 
