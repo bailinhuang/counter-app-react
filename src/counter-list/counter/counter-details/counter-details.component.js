@@ -1,5 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux'
+import './counter-details.css'
+import { withRouter } from "react-router-dom"
 
 class CounterDetails extends React.Component {
 
@@ -7,25 +9,34 @@ class CounterDetails extends React.Component {
 
     let index = this.props.counterList.findIndex(x => x.key === this.props.match.params.id);
     let counter = this.props.counterList[index];
-    console.log(this.props.counterList)
-    console.log(this.props)
-    console.log(index)
-    console.log(counter)
+
+    const editName = () => {
+      let name = document.getElementById('input-name').value
+      this.props.editName(this.props.match.params.id, name)
+    }
 
     return (
       <div>
         <div>
           <h1>Details</h1>
           <h2>{counter.name}</h2>
+        </div >
+        <div className="details-container">
+          <p>Id: {counter.key}</p>
+          <p>Created: {counter.dateCreated}</p>
+          <p>First click: {counter.firstClick}</p>
+          <p>Last click: {counter.lastClick}</p>
         </div>
-        <p>Id: {counter.key}</p>
-        <div> 
+        <div>
+          <input id="input-name"></input><button onClick={editName}>Edit name</button>
+        </div>
+        <div>
+          <button onClick={() => this.props.deleteCounter(this.props.match.params.id)}>Delete</button>
         </div>
       </div>
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   username: state.login.username,
@@ -35,17 +46,18 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, props) => {
   return {
     getCounter: (id) => {
-      dispatch({ type: 'GET_COUNTER', id });
+      dispatch({ type: 'GET_COUNTER', id })
     },
 
-    editName: (id) => {
-      dispatch({ type: 'EDIT_NAME', id });
+    editName: (id, name) => {
+      dispatch({ type: 'EDIT_NAME', id, name })
     },
 
     deleteCounter: (id) => {
-      dispatch({ type: 'DELETE_COUNTER', id });
+      this.props.history.push('/')
+      dispatch({ type: 'DELETE_COUNTER', id })
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounterDetails)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CounterDetails))
