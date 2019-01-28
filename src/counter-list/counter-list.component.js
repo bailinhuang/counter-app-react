@@ -6,20 +6,8 @@ import './counter-list.component.css'
 class CounterList extends Component {
 
   render() {
-    const counters = this.props.counterList.map(counter => <Counter
-      name={counter.name}
-      id={counter.key}
-      clicks={counter.clicks}
-      deleteCounter={this.props.deleteCounter} 
-      viewDetails={viewDetails}/>)
-
+    
     const addCounterToList = () => {
-      let name = document.getElementById('counter-name').value
-      console.log(name)
-      this.props.addCounter(name)
-    }
-
-    const resetAllCounters = () => {
       let name = document.getElementById('counter-name').value
       console.log(name)
       this.props.addCounter(name)
@@ -28,6 +16,24 @@ class CounterList extends Component {
     const viewDetails = (id) => {
       this.props.viewDetails(id)
     }
+
+    const addClick = (id) => {
+      this.props.addClick(id)
+    }
+
+    const resetCounter = (id) => {
+      this.props.resetCounter(id)
+    }
+
+    const counters = this.props.counterList.map(counter => <Counter
+      name={counter.name}
+      id={counter.key}
+      clicks={counter.clicks}
+      resetCounter={resetCounter}
+      deleteCounter={this.props.deleteCounter} 
+      viewDetails={viewDetails}
+      addClick={addClick}/>)
+
 
     return (
       <div>
@@ -39,7 +45,7 @@ class CounterList extends Component {
             <button onClick={addCounterToList}>Add Counter</button>
           </div>
           <div>
-            <button onClick={resetAllCounters}>Reset all counters</button>
+            <button onClick={() => this.props.resetAllCounters()}>Reset all counters</button>
           </div>
 
         </div>
@@ -60,6 +66,18 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     addCounter: (name) => {
       dispatch({ type: 'ADD_COUNTER', name });
+    },
+
+    addClick: (id) => {
+      dispatch({ type: 'ADD_CLICK', id });
+    },
+
+    resetCounter: (id) => {
+      dispatch({ type: 'RESET_COUNTER', id });
+    },
+
+    resetAllCounters: () => {
+      dispatch({ type: 'RESET_ALL_COUNTERS'});
     },
 
     deleteCounter: (id) => {
