@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import Counter from './counter/counter.component'
 import { connect } from 'react-redux'
 import './counter-list.component.css'
+import LogoutButton from '../login-page/logout-button/logoutButton';
 
 class CounterList extends Component {
 
   render() {
-    
+
     const addCounterToList = () => {
       let name = document.getElementById('counter-name').value
       console.log(name)
@@ -30,13 +31,14 @@ class CounterList extends Component {
       id={counter.key}
       clicks={counter.clicks}
       resetCounter={resetCounter}
-      deleteCounter={this.props.deleteCounter} 
+      deleteCounter={this.props.deleteCounter}
       viewDetails={viewDetails}
-      addClick={addClick}/>)
+      addClick={addClick} />)
 
 
     return (
-      <div>
+      <div> 
+        <LogoutButton />
         <h1>Welcome {this.props.username}</h1>
         <div className="counter-form-container">
           <div>
@@ -77,7 +79,7 @@ const mapDispatchToProps = (dispatch, props) => {
     },
 
     resetAllCounters: () => {
-      dispatch({ type: 'RESET_ALL_COUNTERS'});
+      dispatch({ type: 'RESET_ALL_COUNTERS' });
     },
 
     deleteCounter: (id) => {

@@ -1,4 +1,7 @@
 import uuid from 'uuid'
+
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
 const initialState = {
   blocked: false,
   counterList: [],
@@ -26,7 +29,7 @@ export default function (state = initialState, action) {
       } else {
         newName = action.name
       }
-      let date = new Date()
+      let date = new Date().toString()
       let counter = [{ key: uuid(), name: newName, clicks: 0, dateCreated: date, firstClick: date, lastClick: date }]
       return Object.assign(
         {},
@@ -37,7 +40,7 @@ export default function (state = initialState, action) {
       newCounterList = [...state.counterList]
       index = newCounterList.findIndex(x => x.key === action.id);
       newCounterList[index].clicks += 1
-      newCounterList[index].lastClick = new Date()
+      newCounterList[index].lastClick = new Date().toString()
       return Object.assign(
         {},
         state, {

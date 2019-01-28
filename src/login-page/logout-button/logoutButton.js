@@ -1,22 +1,36 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
+import './logoutButton.css'
 
+class LogoutButton extends React.Component {
+  render() {
 
-const LogoutButton = () => { 
-  return(
-    <button onClick={() => this.props.logOut()}>Logout</button>
-  )
+    const logout = () => {
+      window.sessionStorage.setItem('user', null)
+      this.props.history.push('/')
+      this.props.logOut()
+    }
+
+    return (
+      <div className="button-container">
+        <button onClick={() => logout()
+        }>Logout</button>
+      </div>
+    )
+  }
 }
 
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
+const mapDispatchToProps = (dispatch) => {
+  return {  
     logOut: () => {
-      this.props.history.push('/')
       dispatch({ type: 'LOGOUT' })
     }
   }
 }
 
-export default withRouter(connect(mapDispatchToProps)(LogoutButton))
+const mapStateToProps = (state) => {
+  return state
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LogoutButton))

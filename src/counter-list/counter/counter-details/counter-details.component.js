@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import './counter-details.css'
 import { withRouter } from "react-router-dom"
-import LogOut from '../../../login-page/logout-button/logoutButton'
+import LogoutButton from '../../../login-page/logout-button/logoutButton';
 
 class CounterDetails extends React.Component {
 
   render() {
-
+    console.log('details')
     let index = this.props.counterList.findIndex(x => x.key === this.props.match.params.id);
     let counter = this.props.counterList[index];
 
@@ -19,15 +19,10 @@ class CounterDetails extends React.Component {
     return (
       <div>
         <div>
-          <button onClick={() => {
-            this.props.history.push('/')
-            this.props.logOut()}
-          }>Logout</button>
-        </div>
-        <div>
+          <LogoutButton />
           <h1>Details</h1>
-          <h2>{counter.name}</h2>
-        </div >
+        </div>
+        <h2>{counter.name}</h2>
         <div className="details-container">
           <p>Id: {counter.key}</p>
           <p>Created: {counter.dateCreated}</p>
@@ -38,7 +33,10 @@ class CounterDetails extends React.Component {
           <input id="input-name"></input><button onClick={editName}>Edit name</button>
         </div>
         <div>
-          <button onClick={() => this.props.deleteCounter(this.props.match.params.id)}>Delete</button>
+          <button onClick={() => {
+            this.props.history.push('/counter')
+            this.props.deleteCounter(this.props.match.params.id)
+          }}>Delete</button>
         </div>
       </div>
     )
@@ -61,7 +59,6 @@ const mapDispatchToProps = (dispatch, props) => {
     },
 
     deleteCounter: (id) => {
-      this.props.history.push('/')
       dispatch({ type: 'DELETE_COUNTER', id })
     },
 

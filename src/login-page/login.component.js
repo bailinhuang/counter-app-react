@@ -11,8 +11,9 @@ class Login extends Component {
       let username = document.getElementById("username-input").value
       console.log(username)
       if (username !== "") {  
+        window.sessionStorage.setItem('user', username)
         this.props.addUser(username)
-        this.props.history.push('/counter')
+        this.props.history.push('/counter') 
       }
     }
 
@@ -36,7 +37,7 @@ const mapStateToProps = state => ({
   username: state.username
 });
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addUser: (username) => {
       dispatch({ type: 'ADD_USER', username });
