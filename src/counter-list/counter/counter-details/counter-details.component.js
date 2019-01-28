@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import './counter-details.css'
 import { withRouter } from "react-router-dom"
+import LogOut from '../../../login-page/logout-button/logoutButton'
 
 class CounterDetails extends React.Component {
 
@@ -17,6 +18,12 @@ class CounterDetails extends React.Component {
 
     return (
       <div>
+        <div>
+          <button onClick={() => {
+            this.props.history.push('/')
+            this.props.logOut()}
+          }>Logout</button>
+        </div>
         <div>
           <h1>Details</h1>
           <h2>{counter.name}</h2>
@@ -56,6 +63,10 @@ const mapDispatchToProps = (dispatch, props) => {
     deleteCounter: (id) => {
       this.props.history.push('/')
       dispatch({ type: 'DELETE_COUNTER', id })
+    },
+
+    logOut: () => {
+      dispatch({ type: 'LOGOUT' })
     }
   }
 }

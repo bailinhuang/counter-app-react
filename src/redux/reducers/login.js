@@ -3,6 +3,7 @@ const initialState = {
 }
 
 const ADD_USER = "ADD_USER"
+const LOGOUT = "LOGOUT"
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -11,6 +12,12 @@ export default function (state = initialState, action) {
         {},
         state, {
           username: action.username
+        });
+    case LOGOUT:
+      return Object.assign(
+        {},
+        state, {
+          username: ""
         });
     default:
       return state

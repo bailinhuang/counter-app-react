@@ -2,7 +2,7 @@ import uuid from 'uuid'
 const initialState = {
   blocked: false,
   counterList: [],
-  counterDetail: {key: '', name: ''}
+  counterDetail: { key: '', name: '' }
 }
 
 const ADD_COUNTER = "ADD_COUNTER"
@@ -12,6 +12,7 @@ const GET_COUNTER = "GET_COUNTER"
 const EDIT_NAME = "EDIT_NAME"
 const RESET_COUNTER = "RESET_COUNTER"
 const RESET_ALL_COUNTERS = "RESET_ALL_COUNTERS"
+const LOGOUT = "LOGOUT"
 
 export default function (state = initialState, action) {
   let newName
@@ -25,8 +26,8 @@ export default function (state = initialState, action) {
       } else {
         newName = action.name
       }
-      let date =  new Date()
-      let counter = [{ key: uuid(), name: newName, clicks: 0, dateCreated: date, firstClick: date, lastClick: date}]
+      let date = new Date()
+      let counter = [{ key: uuid(), name: newName, clicks: 0, dateCreated: date, firstClick: date, lastClick: date }]
       return Object.assign(
         {},
         state, {
@@ -62,7 +63,7 @@ export default function (state = initialState, action) {
     case DELETE_COUNTER:
       newCounterList = [...state.counterList]
       index = newCounterList.findIndex(x => x.key === action.id);
-      newCounterList.splice(index, 1) 
+      newCounterList.splice(index, 1)
       return Object.assign(
         {},
         state, {
@@ -73,7 +74,7 @@ export default function (state = initialState, action) {
         newName = "Counter"
       } else {
         newName = action.name
-      } 
+      }
       newCounterList = [...state.counterList]
       index = newCounterList.findIndex(x => x.key === action.id);
       newCounterList[index].name = newName
@@ -82,7 +83,7 @@ export default function (state = initialState, action) {
         state, {
           counterList: newCounterList
         });
-    case GET_COUNTER: 
+    case GET_COUNTER:
       newCounterList = [...state.counterList]
       index = newCounterList.findIndex(x => x.key === action.id);
       newCounterDetail = newCounterList[index]
@@ -90,7 +91,7 @@ export default function (state = initialState, action) {
         {},
         state, {
           counterDetail: newCounterDetail
-        });
+        }); 
     default:
       return state
   }
